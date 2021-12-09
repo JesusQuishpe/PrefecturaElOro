@@ -1,10 +1,10 @@
 @extends('laboratorio.plantillas.master')
-@section('title', 'Coprología-Nuevo')
+@section('title', 'Hematologia-Nuevo')
 @section('content')
     @php
     $data = new stdClass();
-    $data->title = 'Coprología';
-    $data->examen = 'coprologia';
+    $data->title = 'Hematologia';
+    $data->examen = 'hematologia';
     $data->opcion='nuevo';
     $data->showInfo=true;
     @endphp
@@ -23,9 +23,9 @@
             </ul>
         </div>
     @endif
-    <form method="POST" id="formulario" action="{{ route('coprologia.guardar') }}">
+    <form method="POST" id="formulario" action="{{ route('hematologia.guardar') }}">
         @csrf
-        <input type="hidden" name="id_tipo" value="2">
+        <input type="hidden" name="id_tipo" value="7">
         <input type="hidden" name="id_cita" value="{{isset($ultimaCita) ? $ultimaCita->id_cita : ''}}">
         <fieldset {{!isset($ultimaCita) ? 'disabled' : ''}}>
             <h5>Selección del doctor</h5>
@@ -41,61 +41,73 @@
                 <button class="btn btn-primary" type="submit">Guardar</button>
                 <button class="btn btn-primary">Limpiar</button>
             </div>
+            <h3>Hematología</h3>
             <div class="grid-form">
                 <div class="grid-form-item">
-                    <span>Consistencia:</span>
-                    <input type="text" name="consistencia">
+                    <span>Sedimento:</span>
+                    <input type="text" name="sedimento">
                 </div>
                 <div class="grid-form-item">
-                    <span>Moco:</span>
-                    <input type="text" name="moco">
+                    <span>Hematocrito:</span>
+                    <input type="text" name="hematocrito">
                 </div>
                 <div class="grid-form-item">
-                    <span>Sangre:</span>
-                    <input type="text" name="sangre">
+                    <span>Hemoglobina:</span>
+                    <input type="text" name="hemoglobina">
                 </div>
                 <div class="grid-form-item">
-                    <span>Ph:</span>
-                    <input type="text" name="ph">
+                    <span>Hematies:</span>
+                    <input type="text" name="hematies">
                 </div>
-                <div class="grid-form-item">
-                    <span>Azúcares reductores:</span>
-                    <input type="text" name="azucares_reductores">
-                </div>
-                <div class="grid-form-item">
-                    <span>Levadura y micelios:</span>
-                    <input type="text" name="levadura_y_micelos">
-                </div>
-                <div class="grid-form-item">
-                    <span>Gram:</span>
-                    <input type="text" name="gram">
-                </div>
-            </div>
-            <h3>Inmunología</h3>
-            <div class="grid-form">
                 <div class="grid-form-item">
                     <span>Leucocitos:</span>
                     <input type="text" name="leucocitos">
                 </div>
+            </div>
+            <h3>Formula Leucocitaria</h3>
+            <div class="grid-form">
                 <div class="grid-form-item">
-                    <span>Polimorfonucleares:</span>
-                    <input type="text" name="polimorfonucleares">
+                    <span>Segmentados:</span>
+                    <input type="text" name="segmentados">
                 </div>
                 <div class="grid-form-item">
-                    <span>Mononucleares:</span>
-                    <input type="text" name="mononucleares">
+                    <span>Linfocitos:</span>
+                    <input type="text" name="linfocitos">
                 </div>
                 <div class="grid-form-item">
-                    <span>Protozoarios:</span>
-                    <input type="text" name="protozoarios">
+                    <span>Eosinofilos:</span>
+                    <input type="text" name="eosinofilos">
                 </div>
                 <div class="grid-form-item">
-                    <span>Helmintos:</span>
-                    <input type="text" name="helmintos">
+                    <span>Monocitos:</span>
+                    <input type="text" name="monocitos">
+                </div>
+            </div>
+            <h3>Hemostasia</h3>
+            <div class="grid-form">
+                <div class="grid-form-item">
+                    <span>T.Coagulación:</span>
+                    <input type="text" name="t_coagulacion">
                 </div>
                 <div class="grid-form-item">
-                    <span>Esteatorrea:</span>
-                    <input type="text" name="esteatorrea">
+                    <span>T.Sangría:</span>
+                    <input type="text" name="t_sangria">
+                </div>
+                <div class="grid-form-item">
+                    <span>R.Plaquetas:</span>
+                    <input type="text" name="t_plaquetas">
+                </div>
+                <div class="grid-form-item">
+                    <span>T.Protombina(TP):</span>
+                    <input type="text" name="t_protombina_tp">
+                </div>
+                <div class="grid-form-item">
+                    <span>T.Parcial de Tromboplastine(TPT):</span>
+                    <input type="text" name="t_parcial_de_tromboplastine">
+                </div>
+                <div class="grid-form-item">
+                    <span>Fibrinogeno:</span>
+                    <input type="text" name="fibrinogeno">
                 </div>
             </div>
             <h3>Observaciones</h3>

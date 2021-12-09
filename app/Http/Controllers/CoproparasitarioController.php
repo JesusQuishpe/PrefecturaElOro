@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coproparasitario;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class CoproparasitarioController extends Controller
@@ -11,16 +13,88 @@ class CoproparasitarioController extends Controller
     {
         return view('laboratorio.index');
     }
-    public function nuevo()
+
+    public function nuevo(Request $request)
     {
-        return view('laboratorio.coproparasitario.nuevo');
+        $model = new Coproparasitario();
+
+        $request->has('texto') ? $primeraVez = true : $primeraVez = false;
+
+        //Si es que busca
+        $texto = trim($request->query('texto'));
+        $ultimaCita = $model->ultimaCita($texto);
+        //Obtener los doctores
+        $doctores = Doctor::all();
+        return view('laboratorio.coproparasitario.nuevo', compact('doctores', 'ultimaCita', 'primeraVez'));
     }
-    public function editar()
+
+    private function validateRequest(Request $request)
     {
-        return view('laboratorio.coproparasitario.editar');
+        $validated = $request->validate([
+            'id_cita'=>'required|numeric',
+            'id_doc'=>'required|numeric',
+            'id_tipo'=>'required|numeric',
+            'protozoarios'=>'required|max:45',
+            'ameba_histolica'=>'required|max:100',
+            'ameba_coli'=>'required|max:100',
+            'giardia_lmblia'=>'required|max:100',
+            'trichomona_homnis'=>'required|max:45',
+            'chilomatik_mes'=>'required|max:45',
+            'helmintos'=>'required|max:45',
+            'trichuris_trichura'=>'required|max:45',
+            'ascaris_lumbicoide'=>'required|max:45',
+            'strongyloides_stecolaries'=>'required|max:45',
+            'oxiuros'=>'required|max:45',
+            'observaciones'=>'required|max:200'
+        ]);
     }
+
+    public function guardar(Request $request)
+    {
+        $this->validateRequest($request);
+        $model = Coproparasitario::create($request->except(['_token']));
+        $model->save();
+        return redirect()->route('coproparasitario.nuevo');
+    }
+
+    public function update(Request $request, $id_coproparasitario)
+    {
+        $this->validateRequest($request);
+        $coproparasitario = Coproparasitario::find($id_coproparasitario);
+        $coproparasitario->update($request->except(['_token', '_method']));
+        return redirect()->route('coproparasitario.editar');
+    }
+
+
+    public function editar(Request $request)
+    {
+        $model = new Coproparasitario();
+        $request->has('texto') ? $primeraVez = true : $primeraVez = false;
+        $texto = $request->query('texto', '');
+        $ultimaCita = $model->ultimaCita($texto);
+        $datos = $model->buscar($texto);
+        return view('laboratorio.coproparasitario.editar', compact('ultimaCita', 'primeraVez', 'texto', 'datos'));
+    }
+    public function edit($id_coproparasitario)
+    {
+        $coproparasitario = Coproparasitario::find($id_coproparasitario);
+        if ($coproparasitario == null)
+            return abort(404);
+        $doctores = Doctor::all();
+        return view('laboratorio.coproparasitario.edit', ['coproparasitario' => $coproparasitario, 'doctores' => $doctores]);
+    }
+
+    public function delete($id_coproparasitario)
+    {
+        $coproparasitario = Coproparasitario::find($id_coproparasitario);
+        if ($coproparasitario == null)
+            return abort(404);
+        $coproparasitario->delete();
+        return redirect()->route('coproparasitario.editar');
+    }
+
     public function todos()
     {
-        return view('laboratorio.coproparasitario.todos');
+        return view('laboratorio.coproparasitario.eliminar');
     }
 }

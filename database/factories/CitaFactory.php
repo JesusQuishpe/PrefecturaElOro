@@ -18,7 +18,7 @@ class CitaFactory extends Factory
             'hora_cita'=>$this->faker->date("H:i:s"),
             'cedula_cita'=>$this->faker->isbn10(),
             'area'=>$this->faker->randomElement(['Laboratorio','Enfermería','Odontología']),
-            'valor'=>$this->faker->randomFloat(2),
+            'valor'=>$this->faker->randomNumber(4),
             'factura_cita'=>$this->faker->text(10),
             'estado_cita'=>$this->faker->randomLetter(),
             'id_paciente'=>$this->faker->randomNumber(1),
