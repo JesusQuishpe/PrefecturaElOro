@@ -1,10 +1,10 @@
 @extends('laboratorio.plantillas.master')
-@section('title', 'Coprología-Editar')
+@section('title', 'Prueba de Embarazo-Editar')
 @section('content')
     @php
     $data = new stdClass();
-    $data->title = 'Coprología';
-    $data->examen = 'coprologia';
+    $data->title = 'Prueba de Embarazo';
+    $data->examen = 'embarazo';
     $data->opcion = 'editar'; //Tiene que ser igual al de la url
     $data->showInfo = false;
     @endphp
@@ -12,7 +12,7 @@
     @include('laboratorio.plantillas.searchForm',['data'=>$data])
 
     <div>
-        <table id="tb-coprologia" class="lab-table">
+        <table id="tb-embarazo" class="lab-table">
             <thead>
                 <tr>
                     <td>Paciente</td>
@@ -33,8 +33,8 @@
                             <td>{{ $dato->updated_at }}</td>
                             <td>
                                 <div class="link-container">
-                                    <a href="{{ route('coprologia.edit', ['id_coprologia'=>$dato->id]) }}" class="link edit">Editar</a>
-                                    <form action="{{ route('coprologia.delete', ['id_coprologia'=>$dato->id]) }}" method="POST">
+                                    <a href="{{ route('embarazo.edit', ['id_embarazo'=>$dato->id]) }}" class="link edit">Editar</a>
+                                    <form action="{{ route('embarazo.delete', ['id_embarazo'=>$dato->id]) }}" method="POST">
                                         @method("DELETE")
                                         @csrf
                                         <button type="submit" class="link delete">Eliminar</button>

@@ -4,7 +4,7 @@
 @php
 $data = new stdClass();
 $data->title = 'Examen de Orina';
-$data->examen = 'examen-orina';
+$data->examen = 'examenOrina';
 $data->opcion='nuevo';
 $data->showInfo=true;
 @endphp
@@ -23,10 +23,10 @@ $data->showInfo=true;
         </ul>
     </div>
 @endif
-<form method="POST" id="formulario" action="{{ route('examen-orina.guardar') }}">
+<form method="POST" id="formulario" action="{{ route('examenOrina.guardar') }}">
     @csrf
         <input type="hidden" name="id_tipo" value="4">
-        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) ? $ultimaCita->id_cita : ''}}">
+        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) && !is_int($ultimaCita) ? $ultimaCita->id_cita : ''}}">
     <div class="buttons-container">
         <button class="btn btn-primary" type="submit">Guardar</button>
         <button class="btn btn-primary" >Limpiar</button>

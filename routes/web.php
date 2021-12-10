@@ -12,6 +12,7 @@ use App\Http\Controllers\HelicobacterController;
 use App\Http\Controllers\HelicobacterHecesController;
 use App\Http\Controllers\HematologiaController;
 use App\Http\Controllers\HemoglobinaController;
+use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\LaboratorioController;
 use App\Http\Controllers\MedicinaController;
 use App\Http\Controllers\OdontologiaController;
@@ -97,13 +98,13 @@ Route::delete('laboratorio/coproparasitario/{id_coproparasitario}',[Coproparasit
 Route::get('laboratorio/coproparasitario/todos',[CoproparasitarioController::class,'todos'])->name('coproparasitario.todos');
 Route::post('laboratorio/coproparasitario/guardar',[CoproparasitarioController::class,'guardar'])->name('coproparasitario.guardar');
 //Examen de orina
-Route::get('laboratorio/examen-orina/nuevo',[ExamenOrinaController::class,'nuevo'])->name('examen-orina.nuevo');
-Route::get('laboratorio/examen-orina/{id_examenOrina}/editar',[ExamenOrinaController::class,'edit'])->name('examen-orina.edit');
-Route::put('laboratorio/examen-orina/{id_examenOrina}',[ExamenOrinaController::class,'update'])->name('examen-orina.update');
-Route::get('laboratorio/examen-orina/editar',[ExamenOrinaController::class,'editar'])->name('examen-orina.editar');
-Route::delete('laboratorio/examen-orina/{id_examenOrina}',[ExamenOrinaController::class,'delete'])->name('examen-orina.delete');
-Route::get('laboratorio/examen-orina/todos',[ExamenOrinaController::class,'todos'])->name('examen-orina.todos');
-Route::post('laboratorio/examen-orina/guardar',[ExamenOrinaController::class,'guardar'])->name('examen-orina.guardar');
+Route::get('laboratorio/examenOrina/nuevo',[ExamenOrinaController::class,'nuevo'])->name('examenOrina.nuevo');
+Route::get('laboratorio/examenOrina/{id_examenOrina}/editar',[ExamenOrinaController::class,'edit'])->name('examenOrina.edit');
+Route::put('laboratorio/examenOrina/{id_examenOrina}',[ExamenOrinaController::class,'update'])->name('examenOrina.update');
+Route::get('laboratorio/examenOrina/editar',[ExamenOrinaController::class,'editar'])->name('examenOrina.editar');
+Route::delete('laboratorio/examenOrina/{id_examenOrina}',[ExamenOrinaController::class,'delete'])->name('examenOrina.delete');
+Route::get('laboratorio/examenOrina/todos',[ExamenOrinaController::class,'todos'])->name('examenOrina.todos');
+Route::post('laboratorio/examenOrina/guardar',[ExamenOrinaController::class,'guardar'])->name('examenOrina.guardar');
 //Embarazo
 Route::get('laboratorio/embarazo/nuevo',[EmbarazoController::class,'nuevo'])->name('embarazo.nuevo');
 Route::get('laboratorio/embarazo/{id_embarazo}/editar',[EmbarazoController::class,'edit'])->name('embarazo.edit');
@@ -152,3 +153,6 @@ Route::get('laboratorio/tiroideas/editar',[TiroideasController::class,'editar'])
 Route::delete('laboratorio/tiroideas/{id_tiroideas}',[TiroideasController::class,'delete'])->name('tiroideas.delete');
 Route::get('laboratorio/tiroideas/todos',[TiroideasController::class,'todos'])->name('tiroideas.todos');
 Route::post('laboratorio/tiroideas/guardar',[TiroideasController::class,'guardar'])->name('tiroideas.guardar');
+
+//Historial
+Route::get('laboratorio/historial',[HistorialController::class,'index'])->name('historial.index');

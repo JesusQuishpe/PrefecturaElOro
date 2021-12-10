@@ -13,32 +13,22 @@ class BioquimicaController extends Controller
     public function nuevo(Request $request)
     {
         $model=new Bioquimica();
-
-        $request->has('texto') ? $primeraVez=true :$primeraVez=false;
-            
-        //Si es que busca
-        $texto=trim($request->query('texto'));
-        
-        $ultimaCita=$model->ultimaCita($texto);
-        
-        //Obtener los doctores
         $doctores=Doctor::all();
-        return view('laboratorio.bioquimica.nuevo',compact('doctores','ultimaCita','primeraVez'));
+        if($request->has('texto')){
+            $texto=$request->query('texto');
+            $ultimaCita=$model->ultimaCita($texto);
+            return view('laboratorio.bioquimica.nuevo',compact('doctores','ultimaCita','texto'));
+        }
+        
+        return view('laboratorio.bioquimica.nuevo',compact('doctores'));
     }
 
     public function editar(Request $request)
     {
         $model=new Bioquimica();
-
-        $request->has('texto') ? $primeraVez=true :$primeraVez=false;
-
         $texto=$request->query('texto','');
-
-        $ultimaCita=$model->ultimaCita($texto);
-
         $datos=$model->buscar($texto);
-
-        return view('laboratorio.bioquimica.editar',compact('texto','ultimaCita','datos','primeraVez'));
+        return view('laboratorio.bioquimica.editar',compact('texto','datos'));
     }
 
     public function edit($id_bioquimica)

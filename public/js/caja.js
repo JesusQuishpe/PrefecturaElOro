@@ -22,6 +22,7 @@ import {post,postFormData} from "./utils.js";
     });
     document.getElementById("form-busqueda").addEventListener("submit",e=>{
         e.preventDefault();
+        
         var btn = e.submitter;
         //Cuando es ver
         if (btn.id == "ver") {
@@ -59,45 +60,26 @@ function buscarPorCedulaOApellido(opcion) {
 
 
 function mostrarPacientes(json) {
-    console.log("SIZE"+json.length);
     if(json.length==0){
         document.getElementById("tabla-buscar").innerHTML= "No hay registros";
         return;
     }
-    var plantilla = `<table id="tb-pacientes-busqueda">
-                    <thead>
-                        <tr>
-                            <th><b>Cedula</b></th>
-                            <th><b>Apellidos</b></th>
-                            <th><b>Nombres</b></th>
-                            <th><b>Fecha de Nacimiento</b></th>
-                            <th><b>Sexo</b></th>
-                            <th><b>Telefono</b></th>
-                            <th><b>Domicilio</b></th>
-                            <th><b>Provincia</b></th>
-                            <th><b>Ciudad</b></th>
-                            <th><b>Llenar Cita</b></th>
-                        </tr>
-                    </thead>
-                    <tbody>`;
+    var plantilla ="";
     json.forEach((element, pos) => {
         console.log(pos);
         plantilla +=
             `<tr>
-            <td>${element.cedula}</td>
-            <td>${element.apellidos}</td>
-            <td>${element.nombres}</td>
+            <td>${element.nombre_completo}</td>
             <td>${element.fecha_nacimiento}</td>
             <td>${element.sexo}</td>
             <td>${element.telefono}</td>
-            <td>${element.domicilio}</td>
             <td>${element.provincia}</td>
             <td>${element.ciudad}</td>
-            <td><input type='button' value='llenar' onclick="mostrar('${pos}','${element.id_paciente}')"/></td>
+            <td><input type='button' class="btn btn-secondary" value='Llenar' onclick="mostrar('${pos}','${element.id_paciente}')"/></td>
         </tr>`
     });
-    plantilla += `</tbody></table>`;
-    document.getElementById("tabla-buscar").innerHTML= plantilla;
+    
+    document.querySelector('#tabla-buscar tbody').innerHTML= plantilla;
     document.getElementById('idpac').value=json.id_paciente;
 }
 

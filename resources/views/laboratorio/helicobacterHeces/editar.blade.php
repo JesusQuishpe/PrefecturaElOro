@@ -1,10 +1,10 @@
 @extends('laboratorio.plantillas.master')
-@section('title', 'Coprología-Editar')
+@section('title', 'HelicoBacter Heces-Editar')
 @section('content')
     @php
     $data = new stdClass();
-    $data->title = 'Coprología';
-    $data->examen = 'coprologia';
+    $data->title = 'HelicoBacter Pylori IgG Heces';
+    $data->examen = 'helicobacterHeces';//Tiene que ser igual al nombre de la ruta
     $data->opcion = 'editar'; //Tiene que ser igual al de la url
     $data->showInfo = false;
     @endphp
@@ -12,7 +12,7 @@
     @include('laboratorio.plantillas.searchForm',['data'=>$data])
 
     <div>
-        <table id="tb-coprologia" class="lab-table">
+        <table id="tb-helicobacterHeces" class="lab-table">
             <thead>
                 <tr>
                     <td>Paciente</td>
@@ -33,8 +33,11 @@
                             <td>{{ $dato->updated_at }}</td>
                             <td>
                                 <div class="link-container">
-                                    <a href="{{ route('coprologia.edit', ['id_coprologia'=>$dato->id]) }}" class="link edit">Editar</a>
-                                    <form action="{{ route('coprologia.delete', ['id_coprologia'=>$dato->id]) }}" method="POST">
+                                    <a href="{{ route('helicobacterHeces.edit', ['id_helicobacterHeces' => $dato->id]) }}"
+                                        class="link edit">Editar</a>
+                                    <form
+                                        action="{{ route('helicobacterHeces.delete', ['id_helicobacterHeces' => $dato->id]) }}"
+                                        method="POST">
                                         @method("DELETE")
                                         @csrf
                                         <button type="submit" class="link delete">Eliminar</button>
@@ -48,7 +51,7 @@
         </table>
         @isset($datos)
             <div class="d-flex justify-content-center mt-2">
-                {{$datos->links()}}
+                {{ $datos->links() }}
             </div>
         @endisset
     </div>

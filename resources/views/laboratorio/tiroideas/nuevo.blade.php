@@ -15,18 +15,16 @@
     <h3>Insertar datos</h3>
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li class="list-group-item">{{ $error }}</li>
-                    @break
-                @endforeach
-            </ul>
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @break
+            @endforeach
         </div>
     @endif
     <form method="POST" id="formulario" action="{{ route('tiroideas.guardar') }}">
         @csrf
         <input type="hidden" name="id_tipo" value="10">
-        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) ? $ultimaCita->id_cita : ''}}">
+        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) && !is_int($ultimaCita) ? $ultimaCita->id_cita : ''}}">
         <fieldset {{!isset($ultimaCita) ? 'disabled' : ''}}>
             <h5>Selección del doctor</h5>
             <div class="container">
@@ -45,19 +43,19 @@
             <div class="grid-form">
                 <div class="grid-form-item">
                     <span>T3:</span>
-                    <input type="text" name="t3">
+                    <input type="text" name="t3" value="{{old('t3')}}">
                 </div>
                 <div class="grid-form-item">
                     <span>T4:</span>
-                    <input type="text" name="t4">
+                    <input type="text" name="t4" value="{{old('t4')}}">
                 </div>
                 <div class="grid-form-item">
                     <span>TSH:</span>
-                    <input type="text" name="tsh">
+                    <input type="text" name="tsh" value="{{old('tsh')}}">
                 </div>
             </div>
             <h3>Observaciones</h3>
-            <textarea name="observaciones" id="observaciones" cols="30" rows="8"></textarea>
+            <textarea name="observaciones" id="observaciones" cols="30" rows="8">{{old('observaciones')}}</textarea>
         </fieldset>
     </form>
 @endsection

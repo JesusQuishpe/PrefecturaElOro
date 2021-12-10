@@ -16,16 +16,15 @@ class ExamenOrinaController extends Controller
 
     public function nuevo(Request $request)
     {
-        $model = new ExamenOrina();
-
-        $request->has('texto') ? $primeraVez = true : $primeraVez = false;
-
-        //Si es que busca
-        $texto = trim($request->query('texto'));
-        $ultimaCita = $model->ultimaCita($texto);
-        //Obtener los doctores
-        $doctores = Doctor::all();
-        return view('laboratorio.orina.nuevo', compact('doctores', 'ultimaCita', 'primeraVez'));
+        $model=new ExamenOrina();
+        $doctores=Doctor::all();
+        if($request->has('texto')){
+            $texto=$request->query('texto');
+            $ultimaCita=$model->ultimaCita($texto);
+            return view('laboratorio.orina.nuevo',compact('doctores','ultimaCita','texto'));
+        }
+        
+        return view('laboratorio.orina.nuevo',compact('doctores'));
     }
 
     private function validateRequest(Request $request)
@@ -67,7 +66,7 @@ class ExamenOrinaController extends Controller
         $this->validateRequest($request);
         $model = ExamenOrina::create($request->except(['_token']));
         $model->save();
-        return redirect()->route('examen-orina.nuevo');
+        return redirect()->route('examenOrina.nuevo');
     }
 
     public function update(Request $request, $id_examenOrina)
@@ -75,18 +74,16 @@ class ExamenOrinaController extends Controller
         $this->validateRequest($request);
         $examenOrina = ExamenOrina::find($id_examenOrina);
         $examenOrina->update($request->except(['_token', '_method']));
-        return redirect()->route('examen-orina.editar');
+        return redirect()->route('examenOrina.editar');
     }
 
 
     public function editar(Request $request)
     {
-        $model = new ExamenOrina();
-        $request->has('texto') ? $primeraVez = true : $primeraVez = false;
-        $texto = $request->query('texto', '');
-        $ultimaCita = $model->ultimaCita($texto);
-        $datos = $model->buscar($texto);
-        return view('laboratorio.orina.editar', compact('ultimaCita', 'primeraVez', 'texto', 'datos'));
+        $model=new ExamenOrina();
+        $texto=$request->query('texto','');
+        $datos=$model->buscar($texto);
+        return view('laboratorio.orina.editar',compact('texto','datos'));
     }
     public function edit($id_examenOrina)
     {
@@ -103,7 +100,7 @@ class ExamenOrinaController extends Controller
         if ($examenOrina == null)
             return abort(404);
         $examenOrina->delete();
-        return redirect()->route('examen-orina.editar');
+        return redirect()->route('examenOrina.editar');
     }
 
     public function todos()

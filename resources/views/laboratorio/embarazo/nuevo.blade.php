@@ -1,9 +1,9 @@
 @extends('laboratorio.plantillas.master')
-@section('title', 'Embarazo-Nuevo')
+@section('title', 'Prueba de Embarazo-Nuevo')
 @section('content')
     @php
     $data = new stdClass();
-    $data->title = 'Embarazo';
+    $data->title = 'Prueba de embarazo';
     $data->examen = 'embarazo';
     $data->opcion='nuevo';
     $data->showInfo=true;
@@ -15,18 +15,16 @@
     <h3>Insertar datos</h3>
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li class="list-group-item">{{ $error }}</li>
-                    @break
-                @endforeach
-            </ul>
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @break
+            @endforeach
         </div>
     @endif
     <form method="POST" id="formulario" action="{{ route('embarazo.guardar') }}">
         @csrf
         <input type="hidden" name="id_tipo" value="9">
-        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) ? $ultimaCita->id_cita : ''}}">
+        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) && !is_int($ultimaCita) ? $ultimaCita->id_cita : ''}}">
         <fieldset {{!isset($ultimaCita) ? 'disabled' : ''}}>
             <h5>Selección del doctor</h5>
             <div class="container">
@@ -44,12 +42,12 @@
             <div class="grid-form">
                 <div class="grid-form-item">
                     <span>Resultado:</span>
-                    <input type="text" name="resultado">
+                    <input type="text" name="resultado" value="{{old('resultado')}}">
                 </div>
             </div>
         
             <h3>Observaciones</h3>
-            <textarea name="observaciones" id="observaciones" cols="30" rows="8"></textarea>
+            <textarea name="observaciones" id="observaciones" cols="30" rows="8">{{old('observaciones')}}</textarea>
         </fieldset>
     </form>
 @endsection

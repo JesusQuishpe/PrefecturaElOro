@@ -19,6 +19,7 @@ class CreatePacientesTable extends Migration
             $table->string('cedula',10)->unique();
             $table->string('apellidos',50);
             $table->string('nombres',50);
+            $table->string('nombre_completo',100);
             $table->string('fecha_nacimiento',12);
             $table->string('sexo',10);
             $table->string('telefono',20);

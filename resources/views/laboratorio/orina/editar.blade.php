@@ -4,7 +4,7 @@
 @php
 $data = new stdClass();
 $data->title = 'Examen de Orina';
-$data->examen = 'examen-orina';
+$data->examen = 'examenOrina';
 $data->opcion = 'editar'; //Tiene que ser igual al de la url
 $data->showInfo = false;
 @endphp
@@ -33,8 +33,8 @@ $data->showInfo = false;
                         <td>{{ $dato->updated_at }}</td>
                         <td>
                             <div class="link-container">
-                                <a href="{{ route('examen-orina.edit', ['id_examenOrina'=>$dato->id]) }}" class="link edit">Editar</a>
-                                <form action="{{ route('examen-orina.delete', ['id_examenOrina'=>$dato->id]) }}" method="POST">
+                                <a href="{{ route('examenOrina.edit', ['id_examenOrina'=>$dato->id]) }}" class="link edit">Editar</a>
+                                <form action="{{ route('examenOrina.delete', ['id_examenOrina'=>$dato->id]) }}" method="POST">
                                     @method("DELETE")
                                     @csrf
                                     <button type="submit" class="link delete">Eliminar</button>

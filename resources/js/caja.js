@@ -21,8 +21,10 @@ import {post,postFormData} from "./utils.js";
         }
     });
     document.getElementById("form-busqueda").addEventListener("submit",e=>{
+        console.log("Opcion ver");
         e.preventDefault();
         var btn = e.submitter;
+        console.log(btn);
         //Cuando es ver
         if (btn.id == "ver") {
             console.log("Opcion ver");

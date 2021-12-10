@@ -15,11 +15,15 @@ class PacienteFactory extends Factory
      */
     public function definition()
     {
+        $name=$this->faker->name();
+        $lastname=$this->faker->lastName();
+        $fullname=$name.' '.$lastname;
         return [
             'fecha'=>$this->faker->date(),
             'cedula'=>$this->faker->isbn10(),
-            'apellidos'=>$this->faker->lastName(),
-            'nombres'=>$this->faker->name(),
+            'apellidos'=>$lastname,
+            'nombres'=>$name,
+            'nombre_completo'=>$fullname,
             'fecha_nacimiento'=>$this->faker->date(),
             'sexo'=>$this->faker->randomElement(['Masculino','Femenino']),
             'telefono'=>$this->faker->phoneNumber(),

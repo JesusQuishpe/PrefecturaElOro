@@ -16,16 +16,15 @@ class TiroideasController extends Controller
 
     public function nuevo(Request $request)
     {
-        $model = new Tiroideas();
-
-        $request->has('texto') ? $primeraVez = true : $primeraVez = false;
-
-        //Si es que busca
-        $texto = trim($request->query('texto'));
-        $ultimaCita = $model->ultimaCita($texto);
-        //Obtener los doctores
-        $doctores = Doctor::all();
-        return view('laboratorio.tiroideas.nuevo', compact('doctores', 'ultimaCita', 'primeraVez'));
+        $model=new Tiroideas();
+        $doctores=Doctor::all();
+        if($request->has('texto')){
+            $texto=$request->query('texto');
+            $ultimaCita=$model->ultimaCita($texto);
+            return view('laboratorio.tiroideas.nuevo',compact('doctores','ultimaCita','texto'));
+        }
+        
+        return view('laboratorio.tiroideas.nuevo',compact('doctores'));
     }
 
     private function validateRequest(Request $request)
@@ -60,12 +59,10 @@ class TiroideasController extends Controller
 
     public function editar(Request $request)
     {
-        $model = new Tiroideas();
-        $request->has('texto') ? $primeraVez = true : $primeraVez = false;
-        $texto = $request->query('texto', '');
-        $ultimaCita = $model->ultimaCita($texto);
-        $datos = $model->buscar($texto);
-        return view('laboratorio.tiroideas.editar', compact('ultimaCita', 'primeraVez', 'texto', 'datos'));
+        $model=new Tiroideas();
+        $texto=$request->query('texto','');
+        $datos=$model->buscar($texto);
+        return view('laboratorio.tiroideas.editar',compact('texto','datos'));
     }
     public function edit($id_tiroideas)
     {

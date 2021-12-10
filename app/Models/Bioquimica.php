@@ -65,7 +65,7 @@ class Bioquimica extends Model
 
     public static function ultimaCita($cedula)
     {
-        return DB::selectOne(
+        $dato=DB::selectOne(
             'select c.id as id_cita,p.cedula,p.nombres,p.apellidos,p.sexo,c.fecha_cita from 
         citas c inner join pacientes p
         on p.id=c.id_paciente
@@ -73,6 +73,8 @@ class Bioquimica extends Model
         where pacientes.cedula=?)',
             [$cedula, $cedula]
         );
+
+        return $dato ?:0;
     }
     public function buscar($texto)
     {

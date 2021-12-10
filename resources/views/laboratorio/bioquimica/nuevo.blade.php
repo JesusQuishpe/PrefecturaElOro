@@ -15,19 +15,17 @@
 
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li class="list-group-item">{{ $error }}</li>
-                    @break
-                @endforeach
-            </ul>
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @break
+            @endforeach
         </div>
     @endif
 
     <form id="formulario" method="post" action="{{ route('bioquimica.guardar') }}">
         @csrf
         <input type="hidden" name="id_tipo" value="1">
-        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) ? $ultimaCita->id_cita : ''}}">
+        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) && !is_int($ultimaCita) ? $ultimaCita->id_cita : ''}}">
         <fieldset {{ !isset($ultimaCita) ? 'disabled' : '' }}>
             <h5>Selección del doctor</h5>
             <div class="container">

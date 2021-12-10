@@ -16,16 +16,15 @@ class HemoglobinaController extends Controller
 
     public function nuevo(Request $request)
     {
-        $model = new Hemoglobina();
-
-        $request->has('texto') ? $primeraVez = true : $primeraVez = false;
-
-        //Si es que busca
-        $texto = trim($request->query('texto'));
-        $ultimaCita = $model->ultimaCita($texto);
-        //Obtener los doctores
-        $doctores = Doctor::all();
-        return view('laboratorio.hemoglobina.nuevo', compact('doctores', 'ultimaCita', 'primeraVez'));
+        $model=new Hemoglobina();
+        $doctores=Doctor::all();
+        if($request->has('texto')){
+            $texto=$request->query('texto');
+            $ultimaCita=$model->ultimaCita($texto);
+            return view('laboratorio.hemoglobina.nuevo',compact('doctores','ultimaCita','texto'));
+        }
+        
+        return view('laboratorio.hemoglobina.nuevo',compact('doctores'));
     }
 
     private function validateRequest(Request $request)
@@ -58,12 +57,10 @@ class HemoglobinaController extends Controller
 
     public function editar(Request $request)
     {
-        $model = new Hemoglobina();
-        $request->has('texto') ? $primeraVez = true : $primeraVez = false;
-        $texto = $request->query('texto', '');
-        $ultimaCita = $model->ultimaCita($texto);
-        $datos = $model->buscar($texto);
-        return view('laboratorio.hemoglobina.editar', compact('ultimaCita', 'primeraVez', 'texto', 'datos'));
+        $model=new Hemoglobina();
+        $texto=$request->query('texto','');
+        $datos=$model->buscar($texto);
+        return view('laboratorio.hemoglobina.editar',compact('texto','datos'));
     }
     public function edit($id_hemoglobina)
     {

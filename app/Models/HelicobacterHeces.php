@@ -40,7 +40,7 @@ class HelicobacterHeces extends Model
         where p.cedula=? and c.fecha_cita=(select max(fecha_cita) from citas inner join pacientes on pacientes.id=citas.id_paciente
         where pacientes.cedula=?)',
             [$cedula, $cedula]
-        );
+        ) ?:0;
     }
     public function buscar($texto)
     {

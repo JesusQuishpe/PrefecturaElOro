@@ -39,7 +39,7 @@ class Hemoglobina extends Model
         where p.cedula=? and c.fecha_cita=(select max(fecha_cita) from citas inner join pacientes on pacientes.id=citas.id_paciente
         where pacientes.cedula=?)',
             [$cedula, $cedula]
-        );
+        ) ?:0;
     }
     public function buscar($texto)
     {
@@ -52,13 +52,13 @@ class Hemoglobina extends Model
                 'pacientes.nombres',
                 'pacientes.apellidos',
                 'citas.fecha_cita',
-                'doctores.nombres',
+                'doctores.nombres as doctor',
                 'hemoglobina_glicosilada.updated_at',
                 'hemoglobina_glicosilada.observaciones'
             )
             ->where('pacientes.cedula', '=', $texto)
             ->orWhere('pacientes.nombres', 'LIKE', '%' . $texto . '%')
             ->orWhere('pacientes.apellidos', 'LIKE', '%' . $texto . '%')
-            ->paginate(1);
+            ->paginate(10);
     }
 }

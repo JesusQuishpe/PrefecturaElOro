@@ -31,9 +31,9 @@
         <li>
             <div class="item">Examen de orina</div>
             <ul class="submenu">
-                <li action="Nuevo"><a href="{{ route('examen-orina.nuevo') }}">Nuevo</a></li>
-                <li action="Editar"><a href="{{ route('examen-orina.editar') }}">Editar</a></li>
-                <li action="Todos"><a href="{{ route('examen-orina.todos') }}">Todos los resultados</a></li>
+                <li action="Nuevo"><a href="{{ route('examenOrina.nuevo') }}">Nuevo</a></li>
+                <li action="Editar"><a href="{{ route('examenOrina.editar') }}">Editar</a></li>
+                <li action="Todos"><a href="{{ route('examenOrina.todos') }}">Todos los resultados</a></li>
             </ul>
         </li>
         <li>
@@ -85,6 +85,6 @@
             </ul>
         </li>
         <li class="menu-separator-text">Otros</li>
-        <li class="item">Historial</li>
+        <a href="{{ route('historial.index') }}" class="item">Historial</a>
     </ul>
 </aside>

@@ -1,10 +1,10 @@
 @extends('laboratorio.plantillas.master')
-@section('title', 'Coprología-Editar')
+@section('title', 'Hemoglobina glicosilada-Editar')
 @section('content')
     @php
     $data = new stdClass();
-    $data->title = 'Coprología';
-    $data->examen = 'coprologia';
+    $data->title = 'Hemoglobina glicosilada';
+    $data->examen = 'hemoglobina';
     $data->opcion = 'editar'; //Tiene que ser igual al de la url
     $data->showInfo = false;
     @endphp
@@ -12,7 +12,7 @@
     @include('laboratorio.plantillas.searchForm',['data'=>$data])
 
     <div>
-        <table id="tb-coprologia" class="lab-table">
+        <table id="tb-hemoglobina" class="lab-table">
             <thead>
                 <tr>
                     <td>Paciente</td>
@@ -29,12 +29,12 @@
                         <tr>
                             <td>{{ $dato->nombres . ' ' . $dato->apellidos }}</td>
                             <td>{{ $dato->fecha_cita }}</td>
-                            <td>{{ $dato->nombres }}</td>
+                            <td>{{ $dato->doctor }}</td>
                             <td>{{ $dato->updated_at }}</td>
                             <td>
                                 <div class="link-container">
-                                    <a href="{{ route('coprologia.edit', ['id_coprologia'=>$dato->id]) }}" class="link edit">Editar</a>
-                                    <form action="{{ route('coprologia.delete', ['id_coprologia'=>$dato->id]) }}" method="POST">
+                                    <a href="{{ route('hemoglobina.edit', ['id_hemoglobina'=>$dato->id]) }}" class="link edit">Editar</a>
+                                    <form action="{{ route('hemoglobina.delete', ['id_hemoglobina'=>$dato->id]) }}" method="POST">
                                         @method("DELETE")
                                         @csrf
                                         <button type="submit" class="link delete">Eliminar</button>
@@ -51,5 +51,6 @@
                 {{$datos->links()}}
             </div>
         @endisset
+        
     </div>
 @endsection

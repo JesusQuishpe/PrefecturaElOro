@@ -17,15 +17,14 @@ class CoprologiaController extends Controller
     public function nuevo(Request $request)
     {
         $model=new Coprologia();
-
-        $request->has('texto') ? $primeraVez=true :$primeraVez=false;
-
-        //Si es que busca
-        $texto=trim($request->query('texto'));
-        $ultimaCita=$model->ultimaCita($texto);
-        //Obtener los doctores
         $doctores=Doctor::all();
-        return view('laboratorio.coprologia.nuevo',compact('doctores','ultimaCita','primeraVez'));
+        if($request->has('texto')){
+            $texto=$request->query('texto');
+            $ultimaCita=$model->ultimaCita($texto);
+            return view('laboratorio.coprologia.nuevo',compact('doctores','ultimaCita','texto'));
+        }
+        
+        return view('laboratorio.coprologia.nuevo',compact('doctores'));
     }
 
     private function validateRequest(Request $request)
@@ -71,11 +70,9 @@ class CoprologiaController extends Controller
     public function editar(Request $request)
     {
         $model=new Coprologia();
-        $request->has('texto') ? $primeraVez=true :$primeraVez=false;
         $texto=$request->query('texto','');
-        $ultimaCita=$model->ultimaCita($texto);
         $datos=$model->buscar($texto);
-        return view('laboratorio.coprologia.editar',compact('ultimaCita','primeraVez','texto','datos'));
+        return view('laboratorio.coprologia.editar',compact('texto','datos'));
     }
     public function edit($id_coprologia)
     {
