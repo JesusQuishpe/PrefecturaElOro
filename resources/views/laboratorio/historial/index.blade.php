@@ -29,6 +29,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @if (isset($datos) && count($datos) > 0)
 
                     @foreach ($datos as $dato)
@@ -39,7 +40,7 @@
 
                             <td>
                                 <div class="link-container">
-                                    <a href="#"
+                                    <a href="{{ route('historial.ver', ['idTipoExamen'=>$dato->id_tipo,'idExamen'=>$dato->id]) }}"
                                         class="link edit">Ver</a>
                                 </div>
                             </td>

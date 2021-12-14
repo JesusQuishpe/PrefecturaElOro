@@ -156,3 +156,4 @@ Route::post('laboratorio/tiroideas/guardar',[TiroideasController::class,'guardar
 
 //Historial
 Route::get('laboratorio/historial',[HistorialController::class,'index'])->name('historial.index');
+Route::get('laboratorio/{idTipoExamen}/examen/{idExamen}',[HistorialController::class,'ver'])->name('historial.ver');

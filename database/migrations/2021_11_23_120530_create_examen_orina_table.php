@@ -27,14 +27,14 @@ class CreateExamenOrinaTable extends Migration
             $table->float("ph");
             $table->float("densidad");
             $table->string("leucocituria",45);
-            $table->string("nitrito",45);
+            $table->string("nitritos",45);
             $table->string("albumina",45);
             $table->string("glucosa",45);
             $table->string("cetonas",45);
             $table->string("urobilinogeno",45);
             $table->string("bilirrubina",45);
-            $table->string("hem_euteros",45);
-            $table->string("h_lisados",45);
+            $table->string("sangre_enteros",45);
+            $table->string("sangre_lisados",45);
             $table->string("acido_ascorbico",45);
             $table->string("hematies",45);
             $table->string("leucocitos",45);

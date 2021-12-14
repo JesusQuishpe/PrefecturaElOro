@@ -2,7 +2,7 @@
 @section('title', 'Examen de Orina-Actualizar')
 @section('content')
     <h1 id="tipo_examen_title">Coprología (Editar)</h1>
-    <form id="formulario" method="POST" action="{{ route('examen-orina.update', ['id_examenOrina' => $examenOrina->id]) }}">
+    <form id="formulario" method="POST" action="{{ route('examenOrina.update', ['id_examenOrina' => $examenOrina->id]) }}">
         @csrf
         @method('PUT')
         <input type="hidden" name="id_tipo" value="{{ $examenOrina->id_tipo }}">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="grid-form-item">
                     <span>Nitritos:</span>
-                    <input type="text" name="nitrito" value="{{$examenOrina->nitrito}}">
+                    <input type="text" name="nitritos" value="{{$examenOrina->nitritos}}">
                 </div>
                 <div class="grid-form-item">
                     <span>Albumina:</span>
@@ -83,11 +83,11 @@
                 </div>
                 <div class="grid-form-item">
                     <span>Sangre (Hem.Enteros):</span>
-                    <input type="text" name="hem_euteros" value="{{$examenOrina->hem_euteros}}">
+                    <input type="text" name="sangre_enteros" value="{{$examenOrina->sangre_enteros}}">
                 </div>
                 <div class="grid-form-item">
                     <span>Sangre (H. Lisados):</span>
-                    <input type="text" name="h_lisados" value="{{$examenOrina->h_lisados}}">
+                    <input type="text" name="sangre_lisados" value="{{$examenOrina->sangre_lisados}}">
                 </div>
                 <div class="grid-form-item">
                     <span>Ácido Ascorbico:</span>
