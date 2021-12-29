@@ -10,39 +10,37 @@
         <input type="hidden" name="id_cita" value="{{ $helicobacter->id_cita }}">
         <fieldset>
             <h3>Selección del doctor</h3>
-            <div class="container">
+            <div>
                 <span>Doctor:</span>
-                <select name="id_doc" id="select-doctor">
+                <select name="id_doc" id="select-doctor" class="form-select w-50 mb-2">
                     @foreach ($doctores as $doctor)
-                        <option value="{{ $doctor->id }}" {{ $doctor->id === $helicobacter->id_doc ? 'selected' : '' }}>
-                            {{ $doctor->nombres . ' ' . $doctor->apellidos }}</option>
+                        <option value="{{ $doctor->id }}">{{ $doctor->nombres . ' ' . $doctor->apellidos }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="buttons-container">
-                <button class="btn btn-primary" type="submit">Guardar</button>
+            <div class="d-flex justify-content-end mb-2">
+                <button class="btn btn-primary me-2" type="submit">Guardar</button>
                 <button class="btn btn-primary">Limpiar</button>
             </div>
-
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li class="list-group-item">{{ $error }}</li>
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
                         @break
-            @endforeach
-            </ul>
-            </div>
+                    @endforeach
+                </div>
             @endif
-            
             <div class="grid-form">
-                <div class="grid-form-item">
-                    <span>Resultado:</span>
-                    <input type="text" name="resultado" value="{{ $helicobacter->resultado }}">
+                <div class="row">
+                    <div class="col">
+                        <span>Resultado:</span>
+                        <input class="form-control" type="text" name="resultado" value="{{ $helicobacter->resultado}}">
+                    </div>
                 </div>
             </div>
 
             <h3>Observaciones</h3>
-            <textarea name="observaciones" id="observaciones" cols="30" rows="8">{{ $helicobacter->observaciones }}</textarea>
+            <textarea class="form-control" name="observaciones" id="observaciones" cols="30"
+                rows="8">{{ $helicobacter->observaciones}}</textarea>
     </form>
 @endsection

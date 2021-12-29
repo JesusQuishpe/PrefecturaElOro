@@ -12,8 +12,8 @@ $data->showInfo = false;
 @include('laboratorio.plantillas.searchForm',['data'=>$data])
 
 <div>
-    <table id="tb-examen-orina" class="lab-table">
-        <thead>
+    <table id="tb-examen-orina" class="table">
+        <thead class="table-dark text-center">
             <tr>
                 <td>Paciente</td>
                 <td>Fecha de consulta</td>
@@ -26,18 +26,18 @@ $data->showInfo = false;
             @if (isset($datos) && count($datos) > 0)
 
                 @foreach ($datos as $dato)
-                    <tr>
+                    <tr class="text-center align-middle">
                         <td>{{ $dato->nombres . ' ' . $dato->apellidos }}</td>
                         <td>{{ $dato->fecha_cita }}</td>
                         <td>{{ $dato->nombres }}</td>
                         <td>{{ $dato->updated_at }}</td>
                         <td>
-                            <div class="link-container">
-                                <a href="{{ route('examenOrina.edit', ['id_examenOrina'=>$dato->id]) }}" class="link edit">Editar</a>
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ route('examenOrina.edit', ['id_examenOrina'=>$dato->id]) }}" class="btn btn-primary me-2">Editar</a>
                                 <form action="{{ route('examenOrina.delete', ['id_examenOrina'=>$dato->id]) }}" method="POST">
                                     @method("DELETE")
                                     @csrf
-                                    <button type="submit" class="link delete">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
                             </div>
                         </td>

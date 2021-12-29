@@ -2,18 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enfermeria;
 use App\Models\EnfermeriaModel;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EnfermeriaController extends Controller
 {
 
-
+    public function index()
+    {
+        return view('enfermeria.index');
+    }
 
     public function save(Request $request)
     {
-        if ($request->isJson()) {
+        try {
+            //DB::beginTransaction();
+
+            $id_enfermeria = $request->input('id_enfermeria');
+            $model = Enfermeria::where('id', '=', $id_enfermeria)
+                ->update($request->only([
+                    'peso',
+                    'estatura',
+                    'temperatura',
+                    'presion',
+                    'discapacidad',
+                    'embarazo',
+                    'inyeccion',
+                    'curacion',
+                    'medico',
+                    'enfermera',
+                    'atendido'
+                ]));
+
+            return response()->json([
+                'error' => false,
+                'data' => $model
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'error' => true,
+                'message' => $th->getMessage()
+            ], 404);
+        }
+        /*if ($request->isJson()) {
+            dd($request);
+            
+
             DB::beginTransaction();
             try {
                 $data = [
@@ -47,12 +85,31 @@ class EnfermeriaController extends Controller
                 }
                 return response()->json(['res' => false,'error'=>$th->getMessage()]);
             }
-        }
+        }*/
     }
 
     public function pacientes()
     {
-        $model = new EnfermeriaModel();
-        echo json_encode($model->getPacientesEnEspera());
+        $model = new Enfermeria();
+        $datos = $model->enEspera();
+        return response()->json($datos);
+    }
+
+    public function delete($id)
+    {
+        try {
+            $model = Enfermeria::find($id);
+            $model->delete();
+            return response()->json([
+                'error' => false,
+                'data' => $model
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'error' => true,
+                'message' => $th->getMessage()
+            ], 404);
+        }
     }
 }

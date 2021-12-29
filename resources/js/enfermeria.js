@@ -1,17 +1,17 @@
 import {post,get} from "./utils.js";
+
 (function () {
     //Fill table
-    fillTable();
+    //fillTable();
     //Click event for link editar
     document.getElementById("tb-enfermeria").addEventListener("click", e => {
-        if (e.target.classList.contains("edit")) {
+        if (e.target.classList.contains("btn-primary")) {
             var ide = e.target.getAttribute("data-id");
             var area=e.target.getAttribute("area");
+
             document.getElementById("btn-save").setAttribute("data-id", ide);
-            document.getElementById("btn-save").setAttribute("area", area);
-            var container = document.querySelector(".modal-container");
-            var modal = document.querySelector(".modal");
-            showModal([container, modal]);
+            var myModal = new Modal(document.getElementById('modal-enf-nuevo'));
+            myModal.show();
         }
     });
 
@@ -23,11 +23,11 @@ import {post,get} from "./utils.js";
     });
 
     //Click event for cancel button
-    document.getElementById("btn-cancel").addEventListener("click", e => {
+    /*document.getElementById("btn-cancel").addEventListener("click", e => {
         var container = document.querySelector(".modal-container");
         var modal = document.querySelector(".modal");
         hideModal([container, modal]);
-    });
+    });*/
 
     
 })();

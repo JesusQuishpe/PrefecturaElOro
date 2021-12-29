@@ -124,7 +124,7 @@
                         <div class="row mb-1">
                             <div class="col">Ciudad</div>
                             <div class="col">
-                                <select name="ciudad" id="ciudad" class="form-control">
+                                <select name="ciudad" id="ciudad" class="form-select">
                                     <option value="Machala">Machala</option>
                                     <option value="">Arenillas</option>
                                     <option value="">Atahualpa</option>
@@ -145,7 +145,7 @@
                         <div class="row mb-1">
                             <div class="col">Area a Atenderse</div>
                             <div class="col">
-                                <select name="area" id="area" class="form-control">
+                                <select name="area" id="area" class="form-select">
                                     <option value="Medicina">Medicina</option>
                                     <option value="Pediatria">Pediatria</option>
                                     <option value="Ginecologia">Ginecologia</option>

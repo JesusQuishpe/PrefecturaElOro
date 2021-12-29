@@ -26,6 +26,7 @@ class HistorialController extends Controller
         $model = new Historial();
 
         $datos = $model->verHistorial(intval($idTipoExamen), intval($idExamen));
+        //dd($datos);
         //Crear reporte
         $reporte = new LaboratorioReporte();
         $reporte->SetCreator(PDF_CREATOR);

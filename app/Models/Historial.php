@@ -44,7 +44,7 @@ class Historial
             'helicobacter_pylori',
             'helicobacter_heces',
             'hematologia',
-            'hemoglobina',
+            'hemoglobina_glicosilada',
             'embarazo',
             'tiroideas'
         ];
@@ -66,8 +66,9 @@ class Historial
         ->union($helicobacterPylori)
         ->union($helicobacterHeces)
         ->union($hematologia)
+        ->union($hemoglobina)
         ->union($embarazo)
-        ->paginate(10);
+        ->paginate(10)->appends('texto',$texto);
     }
 
     public function ver($examen, $id)
@@ -87,7 +88,6 @@ class Historial
                 "$examen.created_at AS fecha",
                 'doctores.nombres AS doctor',
                 "$examen.*"
-
             ])
             ->where("$examen.id", '=', $id)
             ->get();

@@ -9,9 +9,9 @@ class LaboratorioReporte extends TCPDF
 {
     public function Header()
     {
-        
+
         $image_file = asset('images/prefectura-logo.png');
-        $this->Image($image_file, 10,10, 30, 25, 'PNG', '', 'T', true, 300, '', false, false, 0, false, false, false);
+        $this->Image($image_file, 10, 10, 30, 25, 'PNG', '', 'T', true, 300, '', false, false, 0, false, false, false);
         $this->SetFont('helvetica', 'B', 13);
         $this->SetX(25);
         $this->Cell(0, 0, "CENTRO INTEGRAL  DE SALUD DEL GOBIERNO AUTÓNOMO", 0, 1, 'C', false);
@@ -23,12 +23,11 @@ class LaboratorioReporte extends TCPDF
         $this->Cell(0, 0, "Dirección: 9 de Mayo s/n entre 25 de Junio y Sucre", 0, 1, 'C', false);
         $this->SetX(25);
         $this->Cell(0, 0, "Teléfono: 07-2936055", 0, 1, 'C', false);
-        
     }
     public function Body($datos, $idTipoExamen)
     {
         $this->AddPage();
-        
+
         #-------------DATOS PERSONALES-----------------
         $this->Ln(18);
         $this->SetFont('helvetica', 'B', 13);
@@ -45,7 +44,7 @@ class LaboratorioReporte extends TCPDF
         $this->MultiCell(50, 0, 'Doctor:', 0, 'L', false, 0);
         $this->MultiCell(0, 0, $datos->doctor, 0, 'L', false, 1);
         $this->MultiCell(50, 0, 'Fecha:', 0, 'L', false, 0);
-        $this->MultiCell(0, 0,Carbon::parse($datos->fecha)->format('d/m/y H:i'), 0, 'L', false, 1);
+        $this->MultiCell(0, 0, Carbon::parse($datos->fecha)->format('d/m/y H:i'), 0, 'L', false, 1);
         //Carbon::parse($datos->fecha)->isoFormat('dddd\, D \d\e MMMM \d\e\l Y')
         #-------------TIPO DE EXAMEN-----------------
         $this->SetFont('helvetica', 'B', 13);
@@ -62,6 +61,12 @@ class LaboratorioReporte extends TCPDF
         if ($idTipoExamen === 2)  $this->reporteCoprologia($datos);
         if ($idTipoExamen === 3)  $this->reporteCoproparasitario($datos);
         if ($idTipoExamen === 4)  $this->reporteExamenOrina($datos);
+        if ($idTipoExamen === 5)  $this->reporteHelicobacterHeces($datos);
+        if ($idTipoExamen === 6)  $this->reporteHelicobacter($datos);
+        if ($idTipoExamen === 7)  $this->reporteHematologia($datos);
+        if ($idTipoExamen === 8)  $this->reporteHemoglobina($datos);
+        if ($idTipoExamen === 9)  $this->reportePruebaDeEmbarazo($datos);
+        if ($idTipoExamen === 10)  $this->reporteTiroideas($datos);
     }
 
     public function reporteBioquimica($datos)
@@ -122,7 +127,7 @@ class LaboratorioReporte extends TCPDF
         $this->MultiCell(35, 0, '200 mg%', 0, 'L', false, 0);
         $this->MultiCell(50, 0, 'Paratifica B: ', 0, 'L', false, 0);
         $this->MultiCell(25, 0, $datos->paratifica_b, 0, 'L', false, 1);
-        
+
         $this->MultiCell(55, 0, 'Proteínas totales: ', 0, 'L', false, 0);
         $this->MultiCell(25, 0, $datos->proteinas_totales, 0, 'L', false, 0);
         $this->MultiCell(35, 0, '6-8 mg%', 0, 'L', false, 0);
@@ -144,7 +149,7 @@ class LaboratorioReporte extends TCPDF
         $this->MultiCell(55, 0, 'Relación A/G: ', 0, 'L', false, 0);
         $this->MultiCell(25, 0, $datos->relacion_ag, 0, 'L', false, 0);
         $this->MultiCell(35, 0, '1.4-3', 0, 'L', false, 1);
-        
+
         $this->MultiCell(55, 0, 'Bilirrubina directa: ', 0, 'L', false, 0);
         $this->MultiCell(25, 0, $datos->bilirrubina_directa, 0, 'L', false, 0);
         $this->MultiCell(35, 0, '0.25 mg%', 0, 'L', false, 1);
@@ -166,7 +171,7 @@ class LaboratorioReporte extends TCPDF
         $this->MultiCell(35, 0, '9-11 mg%', 0, 'L', false, 1);
 
         //Enzimas
-        
+
         $this->MultiCell(55, 0, 'Transaminasa OX: ', 0, 'L', false, 0);
         $this->MultiCell(25, 0, $datos->transaminasa_ox, 0, 'L', false, 0);
         $this->MultiCell(35, 0, 'Hasta 31 U/L', 0, 'L', false, 1);
@@ -178,7 +183,7 @@ class LaboratorioReporte extends TCPDF
         $this->MultiCell(55, 0, 'Fosfatasa alcalina adultos: ', 0, 'L', false, 0);
         $this->MultiCell(25, 0, $datos->fosfatasa_alcalina_adultos, 0, 'L', false, 0);
         $this->MultiCell(35, 0, '68-240 U/L', 0, 'L', false, 1);
-        
+
         $this->MultiCell(55, 0, 'Fosfatasa alcalina niños: ', 0, 'L', false, 0);
         $this->MultiCell(25, 0, $datos->fosfatasa_alcalina_ninos, 0, 'L', false, 0);
         $this->MultiCell(35, 0, '100-400 U/L', 0, 'L', false, 1);
@@ -339,6 +344,139 @@ class LaboratorioReporte extends TCPDF
         $this->MultiCell(0, 0, $datos->observaciones, 0, 'L', false, 1);
     }
 
+    public function reporteHelicobacterHeces($datos)
+    {
+
+        $this->MultiCell(50, 0, 'Resultado: ', 0, 'L', false, 0);
+        $this->MultiCell(0, 0, $datos->resultado, 0, 'L', false, 1);
+        $this->Ln(2);
+        $this->MultiCell(0, 0, '==OBSERVACIONES== ', 0, 'C', false, 1);
+        $this->MultiCell(0, 0, $datos->observaciones, 0, 'L', false, 1);
+    }
+
+    public function reporteHelicobacter($datos)
+    {
+        $this->MultiCell(50, 0, 'Resultado: ', 0, 'L', false, 0);
+        $this->MultiCell(0, 0, $datos->resultado, 0, 'L', false, 1);
+        $this->Ln(2);
+        $this->MultiCell(0, 0, '==OBSERVACIONES== ', 0, 'C', false, 1);
+        $this->MultiCell(0, 0, $datos->observaciones, 0, 'L', false, 1);
+    }
+
+    public function reporteHematologia($datos)
+    {
+        $this->MultiCell(70, 0, '==HEMATOLOGÍA==', 0, 'L', false, 1);
+        $this->Ln(2);
+        $this->SetFillColor(200, 220, 255);
+        $this->MultiCell(70, 0, 'Sedimentación: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->sedimento, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, 'mm/h', 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'Hematocrito: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->hematocrito, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, '%', 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'Hemoglobina: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->hemoglobina, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, 'g%', 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'Hematies: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->hematies, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, '/mmm3', 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'Leucocitos: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->leucocitos, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, '/mmm3', 0, 'L', false, 1);
+
+        $this->Ln(2);
+        $this->MultiCell(70, 0, '==FÓRMULA LEUCOCITARIA==', 0, 'L', false, 1);
+        $this->Ln(2);
+
+        $this->MultiCell(70, 0, 'Segmentados: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->segmentados, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, '%', 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'Linfocitos: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->linfocitos, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, '%', 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'Eosinofilos: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->eosinofilos, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, '%', 0, 'L', false, 1);
+
+
+        $this->MultiCell(70, 0, 'Monocitos: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->monocitos, 0, 'L', false, 0);
+        $this->MultiCell(45, 0, '%', 0, 'L', false, 1);
+
+        $this->Ln(2);
+        $this->MultiCell(70, 0, '==HEMOSTASIA==', 0, 'L', false, 1);
+        $this->Ln(2);
+
+        $this->MultiCell(70, 0, 'T.Coagulación: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->t_coagulacion, 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'T.Sangría: ', 0, 'L', false, 0);
+        $this->MultiCell(45, 0, $datos->t_sangria, 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'R.Plaquetas: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->t_plaquetas, 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'T.Protombina: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->t_protombina_tp, 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'T.Parcial de tromboplastina: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->t_parcial_de_tromboplastine, 0, 'L', false, 1);
+
+        $this->MultiCell(70, 0, 'Fibrinogeno: ', 0, 'J', false, 0);
+        $this->MultiCell(45, 0, $datos->fibrinogeno, 0, 'L', false, 1);
+
+        $this->Ln(2);
+        $this->MultiCell(0, 0, '==OBSERVACIONES== ', 0, 'C', false, 1);
+        $this->MultiCell(0, 0, $datos->observaciones, 0, 'L', false, 1);
+    }
+
+    public function reporteHemoglobina($datos)
+    {
+        $this->MultiCell(50, 0, 'Resultado: ', 0, 'L', false, 0);
+        $this->MultiCell(0, 0, $datos->resultado, 0, 'L', false, 1);
+        $this->Ln(2);
+        $this->MultiCell(0, 0, '==OBSERVACIONES== ', 0, 'C', false, 1);
+        $this->MultiCell(0, 0, $datos->observaciones, 0, 'L', false, 1);
+    }
+
+    public function reportePruebaDeEmbarazo($datos)
+    {
+        $this->MultiCell(50, 0, 'Resultado: ', 0, 'L', false, 0);
+        $this->MultiCell(0, 0, $datos->resultado, 0, 'L', false, 1);
+        $this->Ln(2);
+        $this->MultiCell(0, 0, '==OBSERVACIONES== ', 0, 'C', false, 1);
+        $this->MultiCell(0, 0, $datos->observaciones, 0, 'L', false, 1);
+    }
+
+    public function reporteTiroideas($datos)
+    {
+        $this->SetFont('helvetica', 'B', 13);
+        $this->MultiCell(63, 0, 'Prueba', 0, 'L', false, 0);
+        $this->MultiCell(63, 0, 'Resultado', 0, 'L', false, 0);
+        $this->MultiCell(63, 0, 'Valores referidos', 0, 'L', false, 1);
+
+        $this->SetFont('helvetica', '', 12);
+
+        $this->MultiCell(63, 0, 'T3: ', 0, 'L', false, 0);
+        $this->MultiCell(63, 0, $datos->t3, 0, 'L', false, 0);
+        $this->MultiCell(63, 0, '0.8 - 2.02 ng/ml.', 0, 'L', false, 1);
+
+        $this->MultiCell(63, 0, 'T4: ', 0, 'L', false, 0);
+        $this->MultiCell(63, 0, $datos->t4, 0, 'L', false, 0);
+        $this->MultiCell(63, 0, 'HOMBRES:   4.4 - 10.8ug/dl.', 0, 'L', false, 1);
+
+        $this->MultiCell(63, 0, 'TSH: ', 0, 'L', false, 0);
+        $this->MultiCell(63, 0, $datos->tsh, 0, 'L', false, 0);
+        $this->MultiCell(63, 0, '0.5 - 5.0 mUl/ lTSH.', 0, 'L', false, 1);
+
+        //$this->MultiCell(0, 0, $datos->observaciones, 0, 'L', false, 1);
+    }
     public function Footer()
     {
         # code...

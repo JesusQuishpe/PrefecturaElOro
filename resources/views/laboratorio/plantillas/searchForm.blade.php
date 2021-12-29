@@ -1,11 +1,11 @@
 <h1 id="tipo_examen_title">{{ $data->title }}</h1>
 
-<form action="{{ route($data->examen . '.' . $data->opcion) }}" method="GET">
-    <div class="buscar-container container">
+<form action="{{ route($data->examen . '.' . $data->opcion) }}" method="GET" class="my-4">
+    <div class="d-flex justify-content-center align-items-center mb-2">
         <span>Buscar:</span>
-        <input name="texto" type="text" id="input-buscar" placeholder="Cédula o nombres del paciente"
+        <input class="form-control w-50 mx-2" name="texto" type="text" id="input-buscar" placeholder="Cédula o nombres del paciente"
             value="{{ isset($texto) ? $texto : '' }}">
-        <button id="btn-buscar" type="submit" examen="{{ $data->examen }}">Buscar</button>
+        <button id="btn-buscar" class="btn btn-primary" type="submit" examen="{{ $data->examen }}">Buscar</button>
     </div>
 
     <div id="spinner" class="spinner-container">

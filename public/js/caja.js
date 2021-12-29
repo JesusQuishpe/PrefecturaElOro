@@ -85,10 +85,10 @@ function mostrarPacientes(json) {
 
 
 
-function buscarPorCedula(cedula) {
-    console.log({ cedula });
+function buscarPorCedula(texto) {
+    console.log({ texto });
     var data = new FormData();
-    data.append('cedula', cedula);
+    data.append('texto', texto);
     postFormData(URL_PUBLIC+"caja/buscar", data,document.querySelector("input[name=_token]").value)
         .then(res => {
             if (res.ok) {
@@ -129,6 +129,7 @@ function guardar() {
     var cedula = document.getElementById('cedula').value;
     var apellidos = document.getElementById('apellidos').value;
     var nombres = document.getElementById('nombres').value;
+    var nombre_completo=nombres+" "+apellidos;
     var fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
     var sexo = document.getElementById('sexo').value;
     var telefono = document.getElementById('telefono').value;
@@ -146,6 +147,7 @@ function guardar() {
         cedula,
         apellidos,
         nombres,
+        nombre_completo,
         fecha_nacimiento,
         sexo,
         telefono,

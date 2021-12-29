@@ -5,51 +5,53 @@
     $data = new stdClass();
     $data->title = 'HelicobacterHeces';
     $data->examen = 'helicobacterHeces';
-    $data->opcion='nuevo';
-    $data->showInfo=true;
+    $data->opcion = 'nuevo';
+    $data->showInfo = true;
     @endphp
 
     @include('laboratorio.plantillas.searchForm',['data'=>$data])
 
-    
+
     <h3>Insertar datos</h3>
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li class="list-group-item">{{ $error }}</li>
-                    @break
-                @endforeach
-            </ul>
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+                @break
+            @endforeach
         </div>
     @endif
+    
     <form method="POST" id="formulario" action="{{ route('helicobacterHeces.guardar') }}">
         @csrf
         <input type="hidden" name="id_tipo" value="5">
-        <input type="hidden" name="id_cita" value="{{isset($ultimaCita) && !is_int($ultimaCita) ? $ultimaCita->id_cita : ''}}">
-        <fieldset {{!isset($ultimaCita) ? 'disabled' : ''}}>
-            <h5>Selección del doctor</h5>
-            <div class="container">
+        <input type="hidden" name="id_cita"
+            value="{{ isset($ultimaCita) && !is_int($ultimaCita) ? $ultimaCita->id_cita : '' }}">
+        <fieldset {{ !isset($ultimaCita) || is_int($ultimaCita) ? 'disabled' : '' }}>
+            <div>
                 <span>Doctor:</span>
-                <select name="id_doc" id="select-doctor">
+                <select name="id_doc" id="select-doctor" class="form-select w-50 mb-2">
                     @foreach ($doctores as $doctor)
                         <option value="{{ $doctor->id }}">{{ $doctor->nombres . ' ' . $doctor->apellidos }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="buttons-container">
-                <button class="btn btn-primary" type="submit">Guardar</button>
+            <div class="d-flex justify-content-end mb-2">
+                <button class="btn btn-primary me-2" type="submit">Guardar</button>
                 <button class="btn btn-primary">Limpiar</button>
             </div>
             <div class="grid-form">
-                <div class="grid-form-item">
-                    <span>Resultado:</span>
-                    <input type="text" name="resultado">
+                <div class="row">
+                    <div class="col">
+                        <span>Resultado:</span>
+                        <input class="form-control" type="text" name="resultado" value="{{ old('resultado') }}">
+                    </div>
                 </div>
             </div>
-        
+
             <h3>Observaciones</h3>
-            <textarea name="observaciones" id="observaciones" cols="30" rows="8"></textarea>
+            <textarea class="form-control" name="observaciones" id="observaciones" cols="30"
+                rows="8">{{ old('observaciones') }}</textarea>
         </fieldset>
     </form>
 @endsection

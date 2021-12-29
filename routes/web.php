@@ -42,7 +42,12 @@ Route::view('/prueba','odontologia/plantillas/prueba');
 Route::view('/laboratorio','laboratorio/index');
 
 //Gets
+//Enfermeria
 Route::get('/enfermeria/pacientes',[EnfermeriaController::class,'pacientes']);
+Route::post('/enfermeria/save',[EnfermeriaController::class,'save']);
+Route::delete('/enfermeria/delete/{id}',[EnfermeriaController::class,'delete']);
+
+
 Route::get('/odontologia',[OdontologiaController::class,'index']);
 Route::get('/odontologia/pacientes',[OdontologiaController::class,'pacientes']);
 Route::get('/odontologia/historiales',[OdontologiaController::class,'historiales']);
@@ -57,7 +62,7 @@ Route::get('/odontologia/{idOdo}/pdf',[PDFController::class,'pdf'])->name('Route
 Route::post('caja/save',[CajaController::class,'save'])->name('caja.save');
 Route::post('caja/buscar',[CajaController::class,'buscar'])->name('caja.buscar');
 Route::post('/caja/pacientes',[CajaController::class,'pacientes']);
-Route::post('/enfermeria/save',[EnfermeriaController::class,'save']);
+
 Route::post('/odontologia/ficha/save',[FichaController::class,'save']);
 Route::post('/odontologia/lastOdontograma',[FichaController::class,'lastOdontograma']);
 Route::post('/laboratorio/bioquimica/save',[LaboratorioController::class,'saveBioquimica'])->name('bioquimica.save');

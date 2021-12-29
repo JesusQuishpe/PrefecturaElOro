@@ -8,38 +8,38 @@
         <input type="hidden" name="id_tipo" value="{{ $embarazo->id_tipo }}">
         <input type="hidden" name="id_cita" value="{{ $embarazo->id_cita }}">
         <fieldset>
-            <h3>Selección del doctor</h3>
-            <div class="container">
+            <div>
                 <span>Doctor:</span>
-                <select name="id_doc" id="select-doctor">
+                <select name="id_doc" id="select-doctor" class="form-select w-50 mb-2">
                     @foreach ($doctores as $doctor)
-                        <option value="{{ $doctor->id }}" {{ $doctor->id === $embarazo->id_doc ? 'selected' : '' }}>
-                            {{ $doctor->nombres . ' ' . $doctor->apellidos }}</option>
+                        <option value="{{ $doctor->id }}">{{ $doctor->nombres . ' ' . $doctor->apellidos }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="buttons-container">
-                <button class="btn btn-primary" type="submit">Guardar</button>
+            <div class="d-flex justify-content-end mb-2">
+                <button class="btn btn-primary me-2" type="submit">Guardar</button>
                 <button class="btn btn-primary">Limpiar</button>
             </div>
-
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
                     @foreach ($errors->all() as $error)
                         {{ $error }}
-                    @break
-                @endforeach
+                        @break
+                    @endforeach
                 </div>
             @endif
             <div class="grid-form">
-                <div class="grid-form-item">
-                    <span>Resultado:</span>
-                    <input type="text" name="resultado" value="{{ $embarazo->resultado }}">
+                <div class="row">
+                    <div class="col">
+                        <span>Resultado:</span>
+                        <input class="form-control" type="text" name="resultado" value="{{ $embarazo->resultado}}">
+                    </div>
                 </div>
             </div>
 
             <h3>Observaciones</h3>
-            <textarea name="observaciones" id="observaciones" cols="30" rows="8">{{ $embarazo->observaciones }}</textarea>
+            <textarea class="form-control" name="observaciones" id="observaciones" cols="30"
+                rows="8">{{ $embarazo->observaciones}}</textarea>
         </fieldset>
     </form>
 @endsection

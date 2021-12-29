@@ -1,0 +1,251 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/*body {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
+}*/
+.logo-container {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  color: white;
+  font-style: italic;
+  font-size: 30px;
+  font-weight: 600;
+  position: relative;
+  margin: 0px auto;
+}
+.logo-text::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60%;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.spinner-container {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+  padding-bottom: 20px;
+}
+
+aside {
+  width: 300px;
+  background-color: #31353d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+main {
+  position: relative;
+  padding: 40px;
+  left: 300px;
+  width: calc(100% - 300px);
+  height: 100%;
+  overflow: auto;
+}
+
+textarea {
+  resize: none;
+}
+
+/*.container {
+    padding: 20px;
+}*/
+#tipo_examen_title {
+  margin-bottom: 10px;
+}
+
+/*.buscar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+        margin-right: 10px;
+    }
+    input {
+        width: 500px;
+        margin-right: 10px;
+    }
+    button {
+        cursor: pointer;
+        line-height: 1.5;
+        padding: 5px 14px;
+        outline: none;
+        border: 1px solid #2962ff;
+        background-color: #2962ff;
+        color: #fff;
+        border-radius: 5px;
+        &:hover {
+            box-shadow: 1px 2px 4px rgba($color: #000000, $alpha: 0.5);
+            background-color: #004ecb;
+        }
+    }
+}*/
+.menu {
+  margin-top: 20px;
+  color: #818896;
+}
+
+.submenu {
+  background-color: #3a3f48;
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.submenu li {
+  padding: 10px 30px;
+  list-style-position: inside;
+}
+.submenu li a {
+  color: #818896;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.submenu li a:hover {
+  color: #fff;
+}
+
+.item {
+  width: 100%;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 15px;
+}
+.item:hover {
+  color: #fff;
+}
+.item.active {
+  color: #fff;
+  position: relative;
+}
+
+.menu-separator-text {
+  font-size: 13px;
+  font-weight: 600;
+  list-style: none;
+  margin: 0px 10px;
+}
+
+.container-loader {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.container-loader .loader {
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+/*.alert {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: #055160;
+    padding: 10px 12px;
+    font-size: 13px;
+    &.alert-error {
+        color: #842029;
+        border: 1px solid #f5c2c7;
+        background-color: #f8d7da;
+    }
+    &.alert-success {
+        color: #0f5132;
+        border: 1px solid #badbcc;
+        background-color: #d1e7dd;
+    }
+}*/
+.lab-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.lab-table thead {
+  background-color: #31353d;
+  color: #fff;
+  text-align: center;
+}
+.lab-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.link-container {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.link.edit {
+  background-color: #2962ff;
+  color: #fff;
+  margin-right: 5px;
+}
+.link.delete {
+  background-color: #DC3545;
+  color: #fff;
+}
+
+h3 {
+  padding: 5px;
+  border-bottom: 1.8px solid #ccc;
+}
+
+.info-container {
+  padding: 20px;
+}
+
+/*.grid-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 4px;
+    padding: 20px;
+}
+.grid-form-item{
+    display: flex;
+    flex-direction: column;
+
+}*/
+#observaciones {
+  width: 100%;
+}
+
+.formulario {
+  padding: 40px;
+}
